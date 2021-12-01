@@ -1,6 +1,6 @@
-/// Given a list of numbers, return the count where the previous number is lower
 use crate::shared::{input_to_numbers, IncreaseCounter};
 
+/// Given a list of numbers, return the count where the previous number is lower
 pub fn part1(input: &str) -> usize {
     // The number of times the depth increases
     input_to_numbers(input).count_increases()
