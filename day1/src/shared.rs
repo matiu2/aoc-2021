@@ -1,3 +1,5 @@
+use itertools::Itertools;
+
 /// Given input where each line is a number, returns the actual numbers
 /// Logs any that couldn't be parsed
 pub fn input_to_numbers<'a>(input: &'a str) -> impl Iterator<Item = usize> + 'a {
@@ -24,21 +26,7 @@ where
 {
     /// Counts the times a number is greater than its predecesor
     fn count_increases(&mut self) -> usize {
-        // Count the increases
-        let mut count = 0;
-        // We can't use `windows` because this is an iterator, not a slice
-        // `reduce` provides an accumulator (`a`), which we just use to store
-        // the previous number, and it kindly populates the initial value with the first number
-        self.reduce(|a, b| {
-            if b > a {
-                count += 1;
-                log::info!("{} > {}: {}", b, a, count);
-            } else {
-                log::info!("{} !> {}: {}", b, a, count);
-            }
-            b
-        });
-        count
+        self.tuple_windows().filter(|(a, b)| b > a).count()
     }
 }
 
