@@ -20,9 +20,10 @@ pub trait IncreaseCounter {
     fn count_increases(&mut self) -> usize;
 }
 
-impl<T> IncreaseCounter for T
+impl<Iter, Item> IncreaseCounter for Iter
 where
-    T: Iterator<Item = usize>,
+    Iter: Iterator<Item = Item>,
+    Item: PartialOrd + Clone,
 {
     /// Counts the times a number is greater than its predecesor
     fn count_increases(&mut self) -> usize {
@@ -31,8 +32,8 @@ where
 }
 
 #[cfg(test)]
-pub fn test_data() -> &'static str {
-    "199
+pub fn test_data() -> Vec<usize> {
+    let input = "199
 200
 208
 210
@@ -41,5 +42,6 @@ pub fn test_data() -> &'static str {
 240
 269
 260
-263"
+263";
+    input_to_numbers(input).collect()
 }
