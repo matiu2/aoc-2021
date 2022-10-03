@@ -28,7 +28,6 @@ pub fn part1(instructions: &[Instruction]) -> isize {
 
 #[cfg(test)]
 mod test {
-    use crate::parse::Instruction;
 
     use super::part1;
 

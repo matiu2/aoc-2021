@@ -10,6 +10,7 @@ struct State {
 
 impl State {
     fn update(&mut self, instruction: &Instruction) {
+        #[allow(clippy::match_ref_pats)]
         match instruction {
             &Instruction::Forward(amount) => {
                 self.horiz += amount as isize;
@@ -28,7 +29,7 @@ impl State {
 
 pub fn part2(instructions: &[Instruction]) -> isize {
     let mut state = State::default();
-    instructions.into_iter().for_each(|i| state.update(i));
+    instructions.iter().for_each(|i| state.update(i));
     state.result()
 }
 
